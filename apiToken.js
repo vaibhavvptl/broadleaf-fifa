@@ -1,6 +1,7 @@
 const axios = require("axios");
 const express = require("express");
 const app = express();
+const API_URL = process.env.BASE_API_URL;
 const getAuthToken = async (req, res, next) => {
   try {
     // check if access token exists in session or app object
@@ -12,12 +13,12 @@ const getAuthToken = async (req, res, next) => {
 
     // fetch access token from API
     const { data } = await axios.post(
-      `https://hospitality.admin.legends.blcdemo.com/auth/oauth/token?grant_type=client_credentials`,
+      `${API_URL}/auth/oauth/token?grant_type=client_credentials`,
       {},
       {
         auth: {
-          username: "th-client",
-          password: "klj2390!@90as!ASD",
+          username: process.env.AUTH_USERNAME,
+          password: process.env.AUTH_PASSWORD,
         },
       }
     );
@@ -27,7 +28,6 @@ const getAuthToken = async (req, res, next) => {
 
     app.set("accessToken", data.access_token);
 
-    console.log("Access token fetched and stored successfully");
     next();
   } catch (error) {
     console.error("Error fetching access token:", error);
