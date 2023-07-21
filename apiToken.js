@@ -30,8 +30,8 @@ const getAuthToken = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error("Error fetching access token:", error);
-    next(error);
+    console.error(err);
+    res.status(500).send("Error fetching access token");
   }
 };
 
