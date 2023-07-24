@@ -9,11 +9,10 @@ module.exports = {
               items: {
                 type: 'object',
                 properties: {
-                  type: { type: 'string' },
-                  title: { type: 'string' },
-                  Timestamp: { type: 'string',format:'date-time' },
+                  timestamp: { type: 'string',format:'date-time' },
                   status: { type: 'string' },
-                  statuscode:{type:'number'}
+                  statusCode:{type:'number'},
+                  type: { type: 'string' },
                   
                 },
               },

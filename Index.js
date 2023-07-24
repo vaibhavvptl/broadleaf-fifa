@@ -8,11 +8,13 @@ const getAuthToken = require("./apiToken");
 const swaggerUI = require('swagger-ui-express');
 const swagger = require('./swagger/index');
 const app = express();
+const errorHandler=require('./errorHandler')
 const swaggerCss = fs.readFileSync(
   `${process.cwd()}/swagger.css`,
   'utf8'
 );
 
+app.use(express.json());
 app.use(
   session({
     secret: process.env.SECRET,
@@ -29,6 +31,7 @@ app.use(
 
 app.use(getAuthToken);
 app.use("/v1", [fifaRouters]);
+app.use(errorHandler)
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
