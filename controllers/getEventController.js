@@ -18,8 +18,23 @@ const getEventController = async (req, res) => {
     });
     res.status(200).json(response.data);
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error");
+    if (err.response && err.response.status === 404) {
+      res.status(404).send();
+    } 
+     else if (err.response && err.response.status === 403) {
+     
+      res.status(403).send();
+     
+    } 
+    else if (err.response && err.response.status===401){
+      res.status(401).send()
+    }
+    
+    else {
+      // For all other errors
+      console.error(err);
+      res.status(500).send("Error");
+    }
   }
 };
 
