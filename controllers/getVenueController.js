@@ -13,7 +13,7 @@ const getVenueController = async (req, res,next) => {
     // make a request to the events API endpoint with the access token in the Authorization header
     const response = await axios.get(`${API_URL}/api/catalog/venues`, {
       headers: {
-        // Authorization: `Bearer ${req.session.accessToken}`,
+        Authorization: `Bearer ${req.session.accessToken}`,
         "x-context-request": `{"tenantId":"${process.env.TENANT_ID}","applicationId":"${process.env.APPLICATION_ID}"}`,
       },
     });
