@@ -5,8 +5,12 @@ const getVenueController = async (req, res) => {
 	try {
 		// check if access token exists in session
 		if (!req.session.accessToken) {
-			res.status(401).send("Access token not found");
-			return;
+			return res.status(401).json({
+				error: {
+					type: "UnauthorizedRequestError",
+					statuscode: 401,
+				},
+			});
 		}
 
 		// make a request to the events API endpoint with the access token in the Authorization header
